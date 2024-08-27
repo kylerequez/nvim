@@ -1,10 +1,16 @@
 return {
-  'EvgeniGenchev/comment-nvim',
+  'numToStr/Comment.nvim',
+  opts = {
+    -- add any options here
+  },
   config = function()
-    -- Change the default singleline comment
-    vim.api.nvim_set_keymap('n', 'gcc', ':Comment<CR>', { noremap = true, silent = false })
-
-    -- Change the visual mode multiline comment
-    vim.api.nvim_set_keymap('v', 'gcc', ':CommentMore<CR>', { noremap = true, silent = false })
-  end,
+    require('Comment').setup({
+      toggler = {
+        ---Line-comment toggle keymap
+        line = 'gcc',
+        ---Block-comment toggle keymap
+        block = 'gbc',
+      },
+    })
+  end
 }
