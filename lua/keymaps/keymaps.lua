@@ -3,7 +3,7 @@
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Deletes current buffer without saving
 vim.keymap.set('n', '<leader>q', ':bdelete!<CR>', { desc = "[Q]uit Current Buffer", noremap = true, silent = true })
@@ -17,4 +17,5 @@ vim.keymap.set('n', '<leader>q', ':bdelete!<CR>', { desc = "[Q]uit Current Buffe
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Create a keymap to create a new terminal buffer
-vim.api.nvim_set_keymap("n", "<leader>t", ":terminal<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>T", ":terminal<CR>", {desc="Create [T]erminal", noremap = true, silent = true })
+
