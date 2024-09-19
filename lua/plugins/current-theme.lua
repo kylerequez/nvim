@@ -1,12 +1,27 @@
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	"ellisonleao/gruvbox.nvim",
 	priority = 1000,
 	opts = {},
-	init = function()
-		vim.cmd.colorscheme("catppuccin")
+	config = function()
+		vim.o.background = "dark" -- or "light" for light mode
+		vim.cmd([[colorscheme gruvbox]])
 	end,
 }
+
+-- {
+-- 	"catppuccin/nvim",
+-- 	name = "catppuccin",
+-- 	priority = 1000,
+-- 	opts = {},
+-- 	init = function()
+-- 		vim.cmd.colorscheme("catppuccin")
+-- 	end,
+-- }
+-- {
+-- 	"ntk148v/habamax.nvim",
+-- 	name = "habamax",
+-- 	dependencies = { "rktjmp/lush.nvim" },
+-- }
 -- { -- You can easily change to a different colorscheme.
 --     -- Change the name of the colorscheme plugin below, and then
 --     -- change the command in the config to whatever the name of that colorscheme is.
