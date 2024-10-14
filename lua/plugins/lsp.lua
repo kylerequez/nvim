@@ -13,6 +13,19 @@ return {
 	},
 	{ "Bilal2453/luvit-meta", lazy = true },
 	{
+		"rmagatti/goto-preview",
+		event = "BufEnter",
+		config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
+		keys = {
+			{
+				mode = "n",
+				"<leader>gp",
+				"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+				{ desc = "[G]oto [P]review Definition", noremap = true },
+			},
+		},
+	},
+	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -27,24 +40,7 @@ return {
 
 			-- Allows extra capabilities provided by nvim-cmp
 			"hrsh7th/cmp-nvim-lsp",
-			{ "ms-jpq/coq_nvim", branch = "coq" },
-			-- 9000+ Snippets
-			{ "ms-jpq/coq.artifacts", branch = "artifacts" },
-			-- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
-			-- Need to **configure separately**
-			{ "ms-jpq/coq.thirdparty", branch = "3p" },
-			-- - shell repl
-			-- - nvim lua api
-			-- - scientific calculator
-			-- - comment banner
-			-- - etc
 		},
-		init = function()
-			vim.g.coq_settings = {
-				auto_start = "shut-up", -- if you want to start COQ at startup
-				-- Your COQ settings here
-			}
-		end,
 		config = function()
 			-- Brief aside: **What is LSP?**
 			--
@@ -237,12 +233,12 @@ return {
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
-						local coq = require("coq")
+						-- local coq = require("coq")
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for tsserver)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(coq.lsp_ensure_capabilities(server))
+						require("lspconfig")[server_name].setup(server)
 					end,
 				},
 			})
