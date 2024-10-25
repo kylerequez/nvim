@@ -19,7 +19,7 @@ return {
 		keys = {
 			{
 				mode = "n",
-				"<leader>gp",
+				"gp",
 				"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
 				{ desc = "[G]oto [P]review Definition", noremap = true },
 			},
