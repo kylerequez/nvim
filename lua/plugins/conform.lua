@@ -13,7 +13,7 @@ return { -- Autoformat
 		},
 	},
 	opts = {
-		notify_on_error = false,
+		notify_on_error = true,
 		format_on_save = function(bufnr)
 			-- Disable "format_on_save lsp_fallback" for languages that don't
 			-- have a well standardized coding style. You can add additional
@@ -26,15 +26,15 @@ return { -- Autoformat
 				lsp_format_opt = "fallback"
 			end
 			return {
-				timeout_ms = 500,
+				timeout_ms = 3000,
 				lsp_format = lsp_format_opt,
 			}
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			go = { "gofumpt", "goimports", "goimportsreviser", "golines", "gomodifytags" },
+			go = { "gofumpt", "goimports", "gomodifytags", "golines" },
 			templ = { "templ", "tailwindcss-language-server", "prettierd", "prettier" },
-			sql = { "sql-formatter", "sqlfluff", "sqlls" },
+			sql = { "sql-formatter" },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
 			--
