@@ -40,7 +40,9 @@ return {
 			{ "j-hui/fidget.nvim", opts = {} },
 
 			-- Allows extra capabilities provided by nvim-cmp
-			{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+			-- { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+
+			"saghen/blink.cmp",
 		},
 		config = function()
 			-- Brief aside: **What is LSP?**
@@ -128,8 +130,8 @@ return {
 				end,
 			})
 
-			local capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+			-- local capabilities =
+			-- 	require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 			-- Enhanced server configurations
 			local servers = {
@@ -204,6 +206,7 @@ return {
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
+						local capabilities = require("blink.cmp").get_lsp_capabilities()
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 						require("lspconfig")[server_name].setup(server)
 					end,
