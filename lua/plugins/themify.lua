@@ -14,6 +14,6 @@ return {
 		"habamax",
 	},
 	keys = {
-		{ mode = "n", "<leader>fT", "<CMD>:Themify<CR>", desc = "[F]ind [T]heme" },
+		{ mode = "n", "<leader>ft", "<CMD>:Themify<CR>", desc = "[F]ind [T]heme" },
 	},
 }
