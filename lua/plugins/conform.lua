@@ -1,4 +1,4 @@
-return { -- Autoformat
+return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
@@ -15,27 +15,23 @@ return { -- Autoformat
 	opts = {
 		notify_on_error = true,
 		format_on_save = function(bufnr)
-			-- Disable "format_on_save lsp_fallback" for languages that don't
-			-- have a well standardized coding style. You can add additional
-			-- languages here or re-enable it for the disabled ones.
 			local ft = vim.bo[bufnr].filetype
-			-- Use a set for O(1) lookup of disabled filetypes
 			local disabled_fts = { c = true, cpp = true }
 
 			return {
-				timeout_ms = 500, -- Reduced timeout
-				quiet = true, -- Reduce formatter noise
+				timeout_ms = 500,
+				quiet = true,
 				lsp_format = disabled_fts[ft] and "never" or "fallback",
 			}
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
 			go = {
-				"goimports-reviser", -- Handles imports grouping and ordering
-				"gofumpt", -- Stricter gofmt
-				"golines", -- Handle line length
-				"goimports", -- Handle imports if goimports-reviser not available
-				"gotests", -- Format generated tests
+				"goimports-reviser",
+				"gofumpt",
+				"golines",
+				"goimports",
+				"gotests",
 			},
 			templ = { "templ", "tailwindcss-language-server", "prettierd", "prettier" },
 			sql = { "sql-formatter" },

@@ -23,9 +23,7 @@ return {
 					{ section = "startup" },
 				},
 			},
-			lazygit = {
-				configure = true,
-			},
+			lazygit = {},
 			notifier = {
 				enabled = true,
 				timeout = 3000,
