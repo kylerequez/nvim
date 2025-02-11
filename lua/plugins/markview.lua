@@ -7,7 +7,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	opts = {
-		filetypes = { "markdown" },
+		preview = { "markdown" },
 	},
 	keys = {
 		{ mode = "n", "<leader>mt", "<CMD>Markview toggleAll<CR>", desc = "[M]arkview [T]oggle" },
