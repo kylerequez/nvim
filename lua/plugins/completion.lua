@@ -18,7 +18,6 @@ return {
 			signature = { enabled = true },
 			sources = {
 				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-				cmdline = {},
 				providers = {
 					lazydev = {
 						name = "LazyDev",
