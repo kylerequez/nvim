@@ -29,7 +29,8 @@ return {
 			{ "williamboman/mason.nvim", opts = {} },
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			"hrsh7th/cmp-nvim-lsp",
+			-- "hrsh7th/cmp-nvim-lsp",
+			"saghen/blink.cmp",
 		},
 		config = function()
 			vim.lsp.set_log_level("OFF")
@@ -138,12 +139,11 @@ return {
 				vim.diagnostic.config({ signs = { text = diagnostic_signs } })
 			end
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			local servers = {
 				ts_ls = {},
-
+				gopls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -153,7 +153,6 @@ return {
 						},
 					},
 				},
-
 				["html-lsp"] = {
 					filetype = { "html", "templ" },
 				},
