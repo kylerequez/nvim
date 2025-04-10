@@ -12,6 +12,9 @@ return {
 		"ellisonleao/gruvbox.nvim",
 		"default",
 		"habamax",
+		"rose-pine/neovim",
+		"vague2k/vague.nvim",
+		"neanias/everforest-nvim",
 	},
 	keys = {
 		{ mode = "n", "<leader>ft", "<CMD>:Themify<CR>", desc = "[F]ind [T]heme" },
