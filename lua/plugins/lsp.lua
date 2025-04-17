@@ -10,19 +10,6 @@ return {
 	},
 	{ "Bilal2453/luvit-meta", lazy = true },
 	{
-		"rmagatti/goto-preview",
-		event = "BufEnter",
-		config = true,
-		keys = {
-			{
-				mode = "n",
-				"gp",
-				"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-				{ desc = "[G]oto [P]review Definition", noremap = true },
-			},
-		},
-	},
-	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
@@ -154,7 +141,17 @@ return {
 					},
 				},
 				["html-lsp"] = {
-					filetype = { "html", "templ" },
+					filetypes = { "html", "templ" },
+				},
+				["tailwindcss"] = {
+					filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+					settings = {
+						tailwindCSS = {
+							includeLanguages = {
+								templ = "html",
+							},
+						},
+					},
 				},
 			}
 
