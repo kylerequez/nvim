@@ -153,6 +153,9 @@ return {
 						},
 					},
 				},
+				["htmx-lsp"] = {
+					filetypes = { "templ", "javascript", "typescript", "svelte", "react", "html" },
+				},
 			}
 
 			local ensure_installed = vim.tbl_keys(servers or {})
