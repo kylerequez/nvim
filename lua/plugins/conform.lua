@@ -15,14 +15,15 @@ return {
 	opts = {
 		notify_on_error = true,
 		format_on_save = function(bufnr)
-			local ft = vim.bo[bufnr].filetype
-			local disabled_fts = { c = true, cpp = true }
-
-			return {
-				timeout_ms = 500,
-				quiet = true,
-				lsp_format = disabled_fts[ft] and "never" or "fallback",
-			}
+			local disable_filetypes = { c = true, cpp = true }
+			if disable_filetypes[vim.bo[bufnr].filetype] then
+				return nil
+			else
+				return {
+					timeout_ms = 500,
+					lsp_format = "fallback",
+				}
+			end
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
