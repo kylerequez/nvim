@@ -9,6 +9,10 @@ return {
 			},
 		},
 	},
+	{
+		"hinell/lsp-timeout.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+	},
 	{ "Bilal2453/luvit-meta", lazy = true },
 	{
 		"neovim/nvim-lspconfig",
@@ -30,17 +34,16 @@ return {
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-					local fzf = require("fzf-lua")
-					map("gd", fzf.lsp_definitions, "[G]oto [D]efinition")
+					local builtin = require("telescope.builtin")
+					map("rn", vim.lsp.buf.rename, "[R]e[n]ame")
+					map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+					map("gr", builtin.lsp_references, "[G]oto [R]eferences")
+					map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+					map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-					map("gr", fzf.lsp_references, "[G]oto [R]eferences")
-					map("gI", fzf.lsp_implementations, "[G]oto [I]mplementation")
-					map("<leader>D", fzf.lsp_typedefs, "Type [D]efinition")
-					map("<leader>ds", fzf.lsp_document_symbols, "[D]ocument [S]ymbols")
-					map("<leader>ws", fzf.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
-					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-					map("<leader>ca", fzf.lsp_code_actions, "[C]ode [A]ction", { "n", "x" })
-					map("gD", fzf.lsp_declarations, "[G]oto [D]eclaration")
+					map("gs", builtin.lsp_document_symbols, "Open Document [S]ymbols")
+					map("gW", builtin.lsp_dynamic_workspace_symbols, "Open [W]orkspace Symbols")
+					map("gt", builtin.lsp_type_definitions, "[G]oto [T]ype Definition")
 
 					---@param client vim.lsp.Client
 					---@param method vim.lsp.protocol.Method
@@ -206,9 +209,7 @@ return {
 				stylua = {},
 			}
 
-			vim.filetype.add({ extension = { templ = "templ" } })
-
-			local ensure_installed = vim.tbl_keys(servers)
+			local ensure_installed = vim.tbl_keys(servers or {})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup({
 				ensure_installed = {},
