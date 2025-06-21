@@ -16,8 +16,8 @@ return {
 			{ "mason-org/mason.nvim", opts = {} },
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			-- "hrsh7th/cmp-nvim-lsp",
-			"saghen/blink.cmp",
+			"hrsh7th/cmp-nvim-lsp",
+			-- "saghen/blink.cmp",
 		},
 		config = function()
 			vim.lsp.set_log_level("OFF")
@@ -168,7 +168,9 @@ return {
 				},
 			})
 
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			-- local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			local servers = {
 				ts_ls = {},
@@ -181,6 +183,9 @@ return {
 							},
 						},
 					},
+				},
+				templ = {
+					filetypes = { "templ" },
 				},
 				["html-lsp"] = {
 					filetypes = { "html", "templ" },
@@ -198,14 +203,13 @@ return {
 				["htmx-lsp"] = {
 					filetypes = { "templ", "javascript", "typescript", "svelte", "react", "html" },
 				},
+				stylua = {},
 			}
 
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua",
-			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+			vim.filetype.add({ extension = { templ = "templ" } })
 
+			local ensure_installed = vim.tbl_keys(servers)
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup({
 				ensure_installed = {},
 				automatic_installation = false,
