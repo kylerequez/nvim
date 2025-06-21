@@ -3,9 +3,7 @@ return {
 		"ibhagwan/fzf-lua",
 		event = "VimEnter",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			"telescope",
-		},
+		opts = {},
 		keys = function()
 			local fzf = require("fzf-lua")
 			return {
