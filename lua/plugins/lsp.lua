@@ -9,10 +9,6 @@ return {
 			},
 		},
 	},
-	{
-		"hinell/lsp-timeout.nvim",
-		dependencies = { "neovim/nvim-lspconfig" },
-	},
 	{ "Bilal2453/luvit-meta", lazy = true },
 	{
 		"neovim/nvim-lspconfig",
