@@ -30,16 +30,30 @@ return {
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-					local builtin = require("telescope.builtin")
+					-- Telescope
+					-- local builtin = require("telescope.builtin")
+					-- map("rn", vim.lsp.buf.rename, "[R]e[n]ame")
+					-- map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+					-- map("gr", builtin.lsp_references, "[G]oto [R]eferences")
+					-- map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+					-- map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
+					-- map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					-- map("gs", builtin.lsp_document_symbols, "Open Document [S]ymbols")
+					-- map("gW", builtin.lsp_dynamic_workspace_symbols, "Open [W]orkspace Symbols")
+					-- map("gt", builtin.lsp_type_definitions, "[G]oto [T]ype Definition")
+
+					-- Fzf Lua
+					local builtin = require("fzf-lua")
 					map("rn", vim.lsp.buf.rename, "[R]e[n]ame")
 					map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+					map("cA", builtin.lsp_code_actions, "[C]ode [A]ction", { "n", "x" })
 					map("gr", builtin.lsp_references, "[G]oto [R]eferences")
 					map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
 					map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 					map("gs", builtin.lsp_document_symbols, "Open Document [S]ymbols")
-					map("gW", builtin.lsp_dynamic_workspace_symbols, "Open [W]orkspace Symbols")
-					map("gt", builtin.lsp_type_definitions, "[G]oto [T]ype Definition")
+					map("gW", builtin.lsp_workspace_symbols, "Open [W]orkspace Symbols")
+					map("gt", builtin.lsp_typedefs, "[G]oto [T]ype Definition")
 
 					---@param client vim.lsp.Client
 					---@param method vim.lsp.protocol.Method
@@ -214,7 +228,9 @@ return {
 					function(server_name)
 						local server = servers[server_name] or {}
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
+						-- require("lspconfig")[server_name].setup(server)
+						vim.lsp.config(server_name, server)
+						vim.lsp.enable(server_name)
 					end,
 				},
 			})
