@@ -22,7 +22,7 @@ return {
 	-- 	},
 	-- 	signature = { enabled = true },
 	-- 	sources = {
-	-- 		default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+	-- 		default = { "lazydev", "lsp", "buffer", "snippets", "path" },
 	-- 		per_filetype = {
 	-- 			sql = { "snippets", "dadbod", "buffer" },
 	-- 		},
